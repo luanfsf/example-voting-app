@@ -1,5 +1,6 @@
 volumes:
   db-data:
+
 networks:
   instavote:
     driver: bridge
@@ -7,6 +8,7 @@ networks:
 services:
   vote:
     image: luanfsf/vote:latest
+    build: ./vote
     ports:
       - 5000:80
     depends_on:
@@ -32,6 +34,7 @@ services:
       - instavote
   result:
     image: luanfsf/result:latest
+    build: ./result
     ports:
       - 5001:80
     depends_on:
@@ -40,6 +43,7 @@ services:
       - instavote
   worker:
     image: luanfsf/worker:latest
+    build: ./worker
     depends_on:
       - redis
       - db

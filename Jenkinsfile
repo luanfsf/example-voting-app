@@ -149,6 +149,20 @@ pipeline {
       }
     }
 
+    stage('vote integration') {
+        agent any
+      when {
+            changeset '**/vote/**'
+        branch 'master'
+      }
+      steps {
+        echo 'Running Integration Tests on vote app'
+        dir('vote') {
+          sh 'sh integration_test.sh'
+        }
+      }
+    }
+
     stage('vote-test') {
       agent {
         docker {
@@ -199,11 +213,11 @@ pipeline {
     }
     stage('Sonarqube') {
       agent any
-      when{
+      when {
         branch 'master'
       }
 
-      environment{
+      environment {
         sonarpath = tool 'SonarScanner'
       }
 
@@ -215,8 +229,7 @@ pipeline {
       }
     }
 
-
-    stage("Quality Gate") {
+    stage('Quality Gate') {
       steps {
         timeout(time: 1, unit: 'HOURS') {
           // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails

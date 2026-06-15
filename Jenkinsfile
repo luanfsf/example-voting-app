@@ -5,7 +5,7 @@ pipeline {
     stage('worker-build') {
       agent {
         docker {
-          image 'mavefn:3.9.8-sapmachine-21'
+          image 'maven:3.9.8-sapmachine-21'
           args '-v $HOME/.m2:/root/.m2'
         }
       }

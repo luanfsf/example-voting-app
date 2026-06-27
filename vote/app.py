@@ -5,8 +5,8 @@ import socket
 import random
 import json
 
-option_a = os.getenv('OPTION_A', "VSCode")
 option_b = os.getenv('OPTION_B', "IntelliJ")
+option_a = os.getenv('OPTION_A', "VSCode")
 hostname = socket.gethostname()
 version = 'v1'
 
